@@ -37,22 +37,15 @@ class FormatLuaCommand(sublime_plugin.TextCommand):
             view.replace(edit, alltextreg, s)
 
     def _run(self, s):
-        # settings = self.view.settings()
-        # indent_char = " " if settings.get("translate_tabs_to_spaces") else "\t"
-        # indent_char = " " #TODO indent by TAB (currently not supported in python-sqlparse)
-        # indent_size = int(settings.get("tab_size")) if indent_char == " " else 1
         s = s.encode("utf-8")
         packages_path = join(sublime.packages_path(), package)
         os.chdir(packages_path)
-        tmp = "tmp.lua"
-        fileHandle = open(tmp, "wb")
-        fileHandle.write(s)
-        fileHandle.close()
         settings = sublime.load_settings(package + ".sublime-settings")
-        lua_path = settings.get("lua_path")
-        cmd = lua_path + " formatter.lua --file " + tmp
-        # print cmd
-        p = subprocess.Popen(cmd, shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
-        sourcecode = p.stdout.read()
-        os.remove(tmp)
+
+        perl_path = settings.get("perl_path")
+        cmd = perl_path + " reindent.pl"
+
+        p = subprocess.Popen(cmd, shell=True, stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
+        sourcecode = p.communicate(s)[0]
+
         return sourcecode.decode("utf-8")
