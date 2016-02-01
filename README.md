@@ -1,6 +1,6 @@
 ## Summary
 
-FormatLua formats lua code to a more readable form by using ~~[Lua Development Tools library](https://github.com/eclipse/koneki.ldt/tree/master/libraries)~~ [Paul Kulchenko's perl script](http://notebook.kulchenko.com/programming/lua-beautifier-in-55-lines-of-perl).
+FormatLua formats lua code to a more readable form by using ~~[Lua Development Tools library](https://github.com/eclipse/koneki.ldt/tree/master/libraries)~~ [Paul Kulchenko's perl script](http://notebook.kulchenko.com/programming/lua-beautifier-in-55-lines-of-perl) because metalua does not work with Lua 5.3.
 
 ## Require
 * ~~Lua~~ Perl
